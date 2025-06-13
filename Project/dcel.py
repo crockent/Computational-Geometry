@@ -15,8 +15,14 @@ class HalfEdge:
         self.prev = None           # Previous half-edge around the face
 
 class Face:
-    def __init__(self):
-        self.outer_component = []    # One of the half-edges bordering the face
+    def __init__(self, boundary_points=None):
+        self.outer_component = []    
+        self.inner_component = []
+        if boundary_points:
+            self.polygon: Optional[Polygon] = Polygon(boundary_points)
+        else:
+            self.polygon: Optional[Polygon] = None
+
 
 class DCEL:
     def __init__(self):
