@@ -14,7 +14,33 @@ def print_first_and_last_vertex_by_x(self):
         
         return first, last 
 
+def split_vertices_by_median_y(self):
+        if not self.vertices:
+            return [], []
+        points = [v.point for v in self.vertices]
+        n = len(points)
+        ys = [p.y for p in points]
 
+        def quickselect(arr, k):
+            if len(arr) == 1:
+                return arr[0]
+            pivot = random.choice(arr)
+            lows = [el for el in arr if el < pivot]
+            highs = [el for el in arr if el > pivot]
+            pivots = [el for el in arr if el == pivot]
+            if k < len(lows):
+                return quickselect(lows, k)
+            elif k < len(lows) + len(pivots):
+                return pivots[0]
+            else:
+                return quickselect(highs, k - len(lows) - len(pivots))
+
+        median_index = n // 2
+        median_y = quickselect(ys, median_index)
+
+        upper = [p for p in points if p.y > median_y]
+        lower = [p for p in points if p.y <= median_y]
+        return upper, lower
 
 """ This function would implement the triangulation algorithm
     1. pio dexia kai aristera simeia ( tik )
