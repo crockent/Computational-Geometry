@@ -4,24 +4,27 @@ import numpy as np
 class Vertex:
     def __init__(self, x, y):
         self.point = Point(x, y)
-        self.incident_edge = None  # One of the half-edges emanating from the vertex
+        self.incident_edge: tuple[Point, Point] = [self.point, None] 
 
 class HalfEdge:
-    def __init__(self):
-        self.origin = None         # Vertex at the origin of this half-edge
-        self.twin = None           # Twin half-edge (opposite direction)
-        self.incident_face = None  # Face to the left of the half-edge
-        self.next = None           # Next half-edge around the face
-        self.prev = None           # Previous half-edge around the face
+    def __init__(self, next_edge=None, prev_edge=None):
+        self.origin: Point = None         # Vertex at the origin of this half-edge
+        self.twin: tuple[Point, Point] = None
+        self.incident_face = None  
+        self.next = next_edge
+        self.prev = prev_edge
+
+    
 
 class Face:
     def __init__(self, boundary_points=None):
-        self.outer_component = []    
-        self.inner_component = []
+        self.outer_component: tuple[Point, Point] = None
+        self.inner_component: tuple[Point, Point] = None
+
         if boundary_points:
-            self.polygon: Optional[Polygon] = Polygon(boundary_points)
+            self.polygon: Polygon = Polygon(boundary_points)
         else:
-            self.polygon: Optional[Polygon] = None
+            self.polygon: Polygon = None
 
 
 class DCEL:

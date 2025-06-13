@@ -1,5 +1,5 @@
 import dcel
-import pygmt as pg
+import pygmt
 import xarray as xr
 
 data = xr.open_dataset("dataset/binned_border_c.nc")
