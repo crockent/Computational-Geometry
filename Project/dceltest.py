@@ -83,5 +83,9 @@ def test_irregular_decagon_dcel():
 
     print("All DCEL irregular decagon tests passed.")
 
+    
+
+
+
 if __name__ == "__main__":
     test_irregular_decagon_dcel()
